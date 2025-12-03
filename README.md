@@ -1,0 +1,202 @@
+# Helpdesk Ticket System - Assessment Project
+
+## Project Status Summary
+
+### ✅ COMPLETED TASKS
+
+#### 1. **Frontend (React)** ✅
+- React app initialized with `create-react-app`
+- **Components Created:**
+  - `TicketList.js` - Display all tickets with status filter
+  - `CreateTicket.js` - Form to create new tickets
+  - `Layout.js` - Layout wrapper
+- **Features Implemented:**
+  - Ticket list with Title, Priority, Status, Created Date
+  - Filter by Status dropdown
+  - "Resolve" button to mark tickets as RESOLVED
+  - Form validation for Create Ticket
+  - Material-UI styling
+- `.env` file configured with API URL
+- Environment variable: `REACT_APP_API_URL=http://localhost:4000`
+
+#### 2. **Backend API (Node.js/Express)** ✅
+- Express server initialized
+- **Endpoints Implemented:**
+  - `GET /tickets` - List all tickets with optional filters (status, priority)
+  - `POST /tickets` - Create new ticket
+  - `PUT /tickets/:id/status` - Update ticket status
+- CORS enabled
+- Body parser middleware configured
+- SQLite database integration
+
+#### 3. **Database (SQLite)** ✅
+- **schema.sql** created with Tickets table including:
+  - id (INTEGER PRIMARY KEY)
+  - title (TEXT NOT NULL)
+  - description (TEXT)
+  - priority (INTEGER 1-3)
+  - status (TEXT DEFAULT 'OPEN')
+  - createdAt (DATETIME)
+- **sample_queries.sql** includes:
+  - Select all OPEN tickets
+  - Count tickets by priority
+  - Get 5 most recent tickets
+  - Query all tickets
+  - Query high priority tickets
+
+#### 4. **.NET Console Application** ✅
+- .NET console app created
+- **Features Implemented:**
+  - Reads employees.csv file
+  - Displays total employee count
+  - Groups employees by department
+  - Shows employee count per department
+  - Example output:
+    ```
+    Total Employees: 5
+    Employees by Department:
+    IT: 3
+    Finance: 1
+    HR: 1
+    ```
+
+#### 5. **File Structure** ✅
+```
+HelpdeskAssessment/
+├── frontend/               (React app)
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── CreateTicket.js
+│   │   │   ├── TicketList.js
+│   │   │   └── Layout.js
+│   │   ├── App.js
+│   │   ├── App.css
+│   │   ├── index.js
+│   │   ├── theme.js
+│   │   └── reportWebVitals.js
+│   ├── .env
+│   └── package.json
+├── api/                    (Node.js backend)
+│   ├── server.js
+│   ├── db.js
+│   └── package.json
+├── dotnet-task/           (.NET console app)
+│   └── EmployeeStats/
+│       ├── Program.cs
+│       ├── EmployeeStats.csproj
+│       └── employees.csv
+├── sql/
+│   ├── schema.sql
+│   └── sample_queries.sql
+├── HelpdeskAssessment.sln
+└── package.json
+```
+
+---
+
+### ⏳ INCOMPLETE TASKS / TODO
+
+#### 1. **Main README.md File** ❌
+- A root-level README with setup and run instructions is needed
+- Should include:
+  - Setup steps for all three parts
+  - How to run each component
+  - API endpoints documentation
+  - Technology stack details
+
+#### 2. **GitHub Repository** ❌
+- Project needs to be pushed to GitHub
+- Repository should have clear structure
+- Should include setup instructions
+
+#### 3. **Frontend Testing** ⚠️
+- Components exist but full end-to-end testing recommended
+- Ensure proper error handling in all components
+
+#### 4. **.NET CSV File Validation** ⚠️
+- employees.csv exists and works
+- Could add error handling for malformed CSV
+
+---
+
+## How to Run Each Part
+
+### Backend API (Node.js)
+```powershell
+cd D:\HelpdeskAssessment\api
+npm install
+node server.js
+# Runs on http://localhost:4000
+```
+
+### Frontend (React)
+```powershell
+cd D:\HelpdeskAssessment\frontend
+npm install
+npm start
+# Runs on http://localhost:3000
+```
+
+### .NET Console App
+```powershell
+cd D:\HelpdeskAssessment\dotnet-task\EmployeeStats
+dotnet run
+```
+
+---
+
+## API Endpoints
+
+### GET /tickets
+- **Description:** Get all tickets with optional filters
+- **Query Parameters:**
+  - `status` (optional): Filter by status (OPEN, IN_PROGRESS, RESOLVED)
+  - `priority` (optional): Filter by priority (1, 2, 3)
+- **Example:** `GET http://localhost:4000/tickets?status=OPEN`
+
+### POST /tickets
+- **Description:** Create a new ticket
+- **Body:**
+  ```json
+  {
+    "title": "Bug in login page",
+    "description": "User cannot login",
+    "priority": 1
+  }
+  ```
+
+### PUT /tickets/:id/status
+- **Description:** Update ticket status
+- **Body:**
+  ```json
+  {
+    "status": "RESOLVED"
+  }
+  ```
+
+---
+
+## Technology Stack
+
+- **Frontend:** React 19, Material-UI, React Router
+- **Backend:** Node.js, Express
+- **Database:** SQLite3
+- **.NET:** C# Console App (.NET 10.0)
+
+---
+
+## Notes
+
+1. Backend server must be running before frontend for API calls to work
+2. Database is auto-created on first API startup (SQLite)
+3. CORS is enabled for frontend-backend communication
+4. Environment variable `REACT_APP_API_URL` must be set in `.env` file
+
+---
+
+## Next Steps
+
+1. **Create comprehensive README** at project root
+2. **Push to GitHub** with all source files
+3. **Test all endpoints** with sample data
+4. **Add error handling** in frontend components
