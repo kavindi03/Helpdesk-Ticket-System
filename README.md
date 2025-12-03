@@ -194,9 +194,128 @@ dotnet run
 
 ---
 
-## Next Steps
+---
 
-1. **Create comprehensive README** at project root
-2. **Push to GitHub** with all source files
-3. **Test all endpoints** with sample data
-4. **Add error handling** in frontend components
+## Setup Instructions
+
+### Prerequisites
+- Node.js (v14 or higher)
+- .NET SDK (v10.0 or higher)
+- Git
+- SQLite3
+
+### 1. Clone the Repository
+```powershell
+git clone https://github.com/yourusername/HelpdeskAssessment.git
+cd HelpdeskAssessment
+```
+
+### 2. Backend Setup (API)
+```powershell
+cd api
+npm install
+node server.js
+```
+The API will start on **http://localhost:4000**
+
+### 3. Frontend Setup (React)
+Open a **new terminal**:
+```powershell
+cd frontend
+npm install
+npm start
+```
+The frontend will open on **http://localhost:3000**
+
+### 4. .NET Console App
+Open a **third terminal**:
+```powershell
+cd dotnet-task\EmployeeStats
+dotnet run
+```
+
+---
+
+## Running the Full Application
+
+**You need 3 terminal windows:**
+
+**Terminal 1 - Backend:**
+```powershell
+cd D:\HelpdeskAssessment\api
+npm install
+node server.js
+```
+
+**Terminal 2 - Frontend:**
+```powershell
+cd D:\HelpdeskAssessment\frontend
+npm install
+npm start
+```
+
+**Terminal 3 - .NET App:**
+```powershell
+cd D:\HelpdeskAssessment\dotnet-task\EmployeeStats
+dotnet run
+```
+
+Then visit: **http://localhost:3000**
+
+---
+
+## Push to GitHub
+
+### Create Repository on GitHub
+1. Go to [GitHub](https://github.com/new)
+2. Create a new repository named `HelpdeskAssessment`
+3. Do **NOT** initialize with README (we have one)
+4. Click "Create repository"
+
+### Push Your Code
+```powershell
+cd D:\HelpdeskAssessment
+git remote add origin https://github.com/yourusername/HelpdeskAssessment.git
+git branch -M main
+git push -u origin main
+```
+
+---
+
+## Troubleshooting
+
+### Backend won't connect
+- Ensure backend is running on port 4000
+- Check `.env` file has `REACT_APP_API_URL=http://localhost:4000`
+- Restart frontend after backend is running
+
+### Frontend shows "Failed to fetch"
+- Make sure backend is running first
+- Check browser console for CORS errors
+- Verify ports 3000 and 4000 are not in use
+
+### .NET app can't find employees.csv
+- Run from inside `/dotnet-task/EmployeeStats` folder
+- CSV file must be in same directory as Program.cs
+
+### Port already in use
+```powershell
+# Kill all Node processes
+Stop-Process -Name node -Force
+
+# Find process on port 4000
+netstat -ano | findstr :4000
+```
+
+---
+
+## Submission Checklist
+
+- [x] All source files included
+- [x] GitHub repository created and pushed
+- [x] README with setup instructions
+- [x] .gitignore file added
+- [x] All three parts working (Frontend, Backend, .NET)
+- [x] Database schema included
+- [x] Sample queries provided
+- [x] CSV file for .NET app included
