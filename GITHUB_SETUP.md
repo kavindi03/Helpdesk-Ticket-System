@@ -94,10 +94,48 @@ git push
 
 ## Quick Reference
 
-| Command | Purpose |
-|---------|---------|
-| `git init` | Initialize repository ✅ (Done) |
-| `git add .` | Stage all files ✅ (Done) |
+| `git commit` | Create commit ✅ (Done) |
+| `git remote add origin URL` | Connect to GitHub |
+| `git branch -M main` | Rename to main branch |
+| `git push -u origin main` | Push to GitHub |
+| `git status` | Check status |
+
+---
+
+## Final Submission Steps
+
+### 1. Create Repository
+Visit: https://github.com/new
+- Name: `HelpdeskAssessment`
+- Description: `Helpdesk Ticket System - Full Stack Assessment`
+- Select: Public
+- Click: Create
+
+### 2. Push Code (Copy-Paste These Commands)
+```powershell
+cd D:\HelpdeskAssessment
+git remote add origin https://github.com/YOUR_USERNAME/HelpdeskAssessment.git
+git branch -M main
+git push -u origin main
+```
+
+### 3. Verify
+Visit: `https://github.com/YOUR_USERNAME/HelpdeskAssessment`
+
+### 4. Submit Link
+Share: `https://github.com/YOUR_USERNAME/HelpdeskAssessment`
+
+---
+
+## Final Checklist
+
+- [x] Repository initialized locally
+- [x] All files committed
+- [ ] GitHub repository created (do this first)
+- [ ] Code pushed to GitHub (next)
+- [ ] Repository link ready to submit
+- [ ] README visible on GitHub
+- [ ] All folders present on GitHub
 | `git commit -m "message"` | Create commit ✅ (Done) |
 | `git remote add origin URL` | Connect to GitHub |
 | `git branch -M main` | Rename to main branch |
