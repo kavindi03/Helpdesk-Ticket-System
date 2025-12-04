@@ -74,6 +74,42 @@ app.put('/tickets/:id/status', (req, res) => {
   });
 });
 
-// Start Server
+// Root route - simple health check / friendly message
+app.get('/', (req, res) => {
+  res.json({
+    status: 'ok',
+    service: 'Helpdesk Ticket API',
+    message: 'Use /tickets endpoints. See README for details.'
+  });
+});
+
+// Health endpoint (alias)
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// Start Server (bind explicitly and log address)
 const PORT = 4000;
-app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
+const HOST = '127.0.0.1';
+const server = app.listen(PORT, HOST, () => {
+  const addr = server.address();
+  const address = addr.address === '::' ? '0.0.0.0' : addr.address;
+  console.log(`✓ Server listening on http://${address}:${addr.port}`);
+  console.log(`✓ PID: ${process.pid}`);
+});
+
+server.on('error', (err) => {
+  console.error('✗ Server error:', err.code, err.message);
+  process.exit(1);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('✗ Uncaught exception:', err.message);
+  console.error(err.stack);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('✗ Unhandled rejection at:', promise, 'reason:', reason);
+  process.exit(1);
+});
