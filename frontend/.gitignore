@@ -1,0 +1,38 @@
+@"
+# Node (frontend & api)
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+pnpm-lock.yaml
+
+# React build & env
+frontend/build/
+frontend/.env
+frontend/node_modules/
+
+# API env & DB
+api/node_modules/
+api/.env
+api/tickets.db
+
+# SQLite files
+*.db
+*.sqlite
+*.sqlite3
+
+# .NET build
+dotnet-task/**/bin/
+dotnet-task/**/obj/
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+"@ > .gitignore
