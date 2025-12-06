@@ -210,13 +210,16 @@ const TicketList = () => {
   const fetchTickets = useCallback(async () => {
     try {
       setLoading(true);
+      console.log('Fetching tickets from:', `${API_URL}/tickets`);
       const response = await fetch(`${API_URL}/tickets`);
       const data = await response.json();
+      console.log('Fetched tickets data:', data);
       setTickets(data);
       setError(null);
     } catch (err) {
-      setError('Failed to fetch tickets. Please try again later.');
+      const errorMsg = 'Failed to fetch tickets. Please try again later.';
       console.error('Error fetching tickets:', err);
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -242,7 +245,18 @@ const TicketList = () => {
   };
 
   const handleResolveTicket = async (ticketId) => {
+    console.log('Resolving ticket with ID:', ticketId);
+    
+    if (!ticketId) {
+      console.error('Ticket ID is undefined or null');
+      setError('Invalid ticket ID: ID is missing');
+      return;
+    }
+
     try {
+      // Log the ticket ID being used
+      console.log('Attempting to resolve ticket with ID:', ticketId);
+      
       const response = await fetch(`${API_URL}/tickets/${ticketId}/status`, {
         method: 'PUT',
         headers: {
@@ -252,13 +266,20 @@ const TicketList = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to update ticket status');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `Server responded with status ${response.status}`);
       }
 
-      fetchTickets();
+      // Show success message
+      setError(null);
+      console.log('Successfully updated ticket status');
+      
+      // Refresh the tickets list
+      await fetchTickets();
     } catch (err) {
-      setError('Failed to update ticket status');
-      console.error('Error updating ticket status:', err);
+      const errorMessage = err.message || 'Failed to update ticket status';
+      console.error('Error updating ticket status:', errorMessage, err);
+      setError(errorMessage);
     }
   };
 
@@ -589,7 +610,10 @@ const TicketList = () => {
                           <Tooltip title="Mark as Resolved">
                             <IconButton
                               size="small"
-                              onClick={() => handleResolveTicket(ticket._id)}
+                              onClick={() => {
+                                console.log('Resolve button clicked for ticket:', ticket);
+                                handleResolveTicket(ticket.id || ticket._id);
+                              }}
                               sx={{
                                 color: '#2e7d32',
                                 backgroundColor: 'rgba(46, 125, 50, 0.1)',
